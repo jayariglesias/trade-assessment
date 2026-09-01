@@ -1,0 +1,9 @@
+-- CreateTable
+CREATE TABLE "trades" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "symbol" TEXT NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "price" REAL NOT NULL,
+    "side" TEXT NOT NULL,
+    "timestamp" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

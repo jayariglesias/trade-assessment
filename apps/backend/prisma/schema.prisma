@@ -1,0 +1,25 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/infrastructure/database/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Trade {
+  id              String   @id
+  symbol          String
+  quantity        Int
+  price           Float
+  side            String
+  trader          String
+  tradeDate       String   @map("trade_date")
+  status          String   @default("ACTIVE")
+  book            String
+  counterparty    String
+  tradeTimestamp  DateTime @default(now()) @map("trade_timestamp")
+
+  @@map("trades")
+}
