@@ -1,4 +1,4 @@
-# ?? Trade Blotter
+﻿# 📊 Trade Blotter
 
 A simple trading blotter app where you can create, view, update, and cancel trades in real time.
 
@@ -11,7 +11,7 @@ You do **not** need to be a developer to follow this guide. Pick one path below 
 
 ---
 
-## ?? What you get
+## 🌐 What you get
 
 | App | URL | What it is |
 |-----|-----|------------|
@@ -21,7 +21,7 @@ You do **not** need to be a developer to follow this guide. Pick one path below 
 
 ---
 
-## ??? Tech stack
+## 🛠️ Tech stack
 
 | Layer | Tools |
 |-------|--------|
@@ -33,7 +33,7 @@ You do **not** need to be a developer to follow this guide. Pick one path below 
 
 ---
 
-## ?? Before you start
+## 📦 Before you start
 
 ### Option A needs
 
@@ -51,7 +51,7 @@ npm install -g pnpm
 
 ---
 
-## ?? Option A - Run locally with pnpm
+## 🚀 Option A - Run locally with pnpm
 
 ### Step 1 - Open the project folder
 
@@ -133,7 +133,7 @@ pnpm kill-ports
 
 ---
 
-## ?? Option B - Run with Docker
+## 🐳 Option B - Run with Docker
 
 No Node.js or pnpm required. Docker builds and runs everything for you.
 
@@ -182,7 +182,7 @@ docker compose down -v
 
 ---
 
-## ?? Handy commands (local)
+## 🔧 Handy commands (local)
 
 | Command | What it does |
 |---------|----------------|
@@ -203,7 +203,7 @@ REST request and response shapes come from the backend OpenAPI spec, not hand-wr
 
 | Package | Role |
 |---------|------|
-| `@shared/api-contracts` | Generated schema, `TradeDto` / `CreateTradeDto` / `UpdateTradeDto`, and typed `createApiClient`
+| `@shared/api-contracts` | Generated schema, `TradeDto` / `CreateTradeDto` / `UpdateTradeDto`, and typed `createApiClient` |
 
 After changing Nest DTOs, run:
 
@@ -223,18 +223,21 @@ import type { CreateTradeDto, TradeDto } from "@shared/api-contracts";
 
 This repo has two Dockerfiles. Use the **repo root** as build context for both services.
 
-| Service | Dockerfile path |
-|---------|-----------------|
-| Backend | `apps/backend/Dockerfile` |
-| Frontend | `apps/frontend/Dockerfile` |
+| Service | Dockerfile path | Railway config file |
+|---------|-----------------|---------------------|
+| Backend | `apps/backend/Dockerfile` | `apps/backend/railway.toml` |
+| Frontend | `apps/frontend/Dockerfile` | `apps/frontend/railway.toml` |
+
+In each Railway service, open **Settings** and set **Config file path** to the matching `railway.toml`. Keep **root directory** as the repo root.
 
 **Backend env**
 
 | Variable | Example |
 |----------|---------|
 | `DATABASE_URL` | `file:/data/db.sqlite` |
-| `CORS_ORIGIN` | your frontend URL |
-| `PORT` | set by the platform |
+| `CORS_ORIGIN` | `https://your-frontend.up.railway.app` |
+
+Do **not** set `PORT`. Railway injects it automatically.
 
 Mount a volume at `/data` so SQLite survives redeploys.
 
@@ -253,24 +256,24 @@ docker compose up --build
 
 ---
 
-## ?? Project layout
+## 📁 Project layout
 
 ```text
 trade-assessment/
-+-- apps/
-�   +-- backend/     # NestJS API + Prisma + WebSockets
-�   +-- frontend/    # Next.js UI
-+-- packages/
-�   +-- api-contracts/   # OpenAPI schema, typed client, and DTO types
-+-- configs/         # Shared ESLint + TypeScript configs
-+-- AI_USAGE_REPORT.md
-+-- docker-compose.yml
-+-- package.json
+├── apps/
+│   ├── backend/     # NestJS API + Prisma + WebSockets
+│   └── frontend/    # Next.js UI
+├── packages/
+│   └── api-contracts/   # OpenAPI schema, typed client, and DTO types
+├── configs/         # Shared ESLint + TypeScript configs
+├── AI_USAGE_REPORT.md
+├── docker-compose.yml
+└── package.json
 ```
 
 ---
 
-## ?? Troubleshooting
+## 🐛 Troubleshooting
 
 **Port already in use**
 
