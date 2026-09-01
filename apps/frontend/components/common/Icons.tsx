@@ -184,3 +184,39 @@ export function LoaderIcon(props: IconProps) {
     </Icon>
   );
 }
+
+export function LayersIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="m12.83 2.18 8 4.5a1 1 0 0 1 0 1.74l-8 4.5a2 2 0 0 1-1.66 0l-8-4.5a1 1 0 0 1 0-1.74l8-4.5a2 2 0 0 1 1.66 0Z" />
+      <path d="m3.5 10.5 8.33 4.67a2 2 0 0 0 1.67 0L21.5 10.5" />
+      <path d="m3.5 15.5 8.33 4.67a2 2 0 0 0 1.67 0L21.5 15.5" />
+    </Icon>
+  );
+}
+
+export function ActivityIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+    </Icon>
+  );
+}
+
+export function TrendingUpIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="m22 7-8.5 8.5-5-5L2 17" />
+      <path d="M16 7h6v6" />
+    </Icon>
+  );
+}
+
+export function TrendingDownIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="m22 17-8.5-8.5-5 5L2 7" />
+      <path d="M16 17h6v-6" />
+    </Icon>
+  );
+}

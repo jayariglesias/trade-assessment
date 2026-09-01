@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TradeDto } from "@shared/api-contracts";
 import { BlotterPagination } from "@/components/features/BlotterPagination";
+import { BlotterStats } from "@/components/features/BlotterStats";
 import { BlotterToolbar } from "@/components/features/BlotterToolbar";
 import { PositionSummary } from "@/components/features/PositionSummary";
 import { useTradeEntry } from "@/components/features/TradeEntryProvider";
@@ -147,7 +148,7 @@ export function HomeScreen() {
 
   return (
     <section aria-labelledby="blotter-heading" className="space-y-4 sm:space-y-5">
-      <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+      <header className="space-y-4">
         <div>
           <h1
             id="blotter-heading"
@@ -162,40 +163,12 @@ export function HomeScreen() {
             </span>
           </p>
         </div>
-        <dl className="grid grid-cols-4 gap-2 sm:flex sm:gap-2">
-          <div className="rounded-md border border-border bg-surface-raised px-2 py-2 sm:min-w-19 sm:px-3 sm:py-2">
-            <dt className="text-[0.65rem] font-medium uppercase tracking-wide text-muted">
-              Total
-            </dt>
-            <dd className="mt-0.5 text-base font-semibold tabular-nums sm:text-lg">
-              {trades.length}
-            </dd>
-          </div>
-          <div className="rounded-md border border-border bg-surface-raised px-2 py-2 sm:min-w-19 sm:px-3 sm:py-2">
-            <dt className="text-[0.65rem] font-medium uppercase tracking-wide text-muted">
-              Active
-            </dt>
-            <dd className="mt-0.5 text-base font-semibold tabular-nums sm:text-lg">
-              {activeCount}
-            </dd>
-          </div>
-          <div className="rounded-md border border-border bg-surface-raised px-2 py-2 sm:min-w-19 sm:px-3 sm:py-2">
-            <dt className="text-[0.65rem] font-medium uppercase tracking-wide text-buy">
-              Buy
-            </dt>
-            <dd className="mt-0.5 text-base font-semibold tabular-nums text-buy sm:text-lg">
-              {buyCount}
-            </dd>
-          </div>
-          <div className="rounded-md border border-border bg-surface-raised px-2 py-2 sm:min-w-19 sm:px-3 sm:py-2">
-            <dt className="text-[0.65rem] font-medium uppercase tracking-wide text-sell">
-              Sell
-            </dt>
-            <dd className="mt-0.5 text-base font-semibold tabular-nums text-sell sm:text-lg">
-              {sellCount}
-            </dd>
-          </div>
-        </dl>
+        <BlotterStats
+          total={trades.length}
+          active={activeCount}
+          buy={buyCount}
+          sell={sellCount}
+        />
       </header>
 
       <PositionSummary
