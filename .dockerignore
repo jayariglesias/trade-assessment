@@ -1,0 +1,16 @@
+node_modules
+**/node_modules
+.git
+.cursor
+.turbo
+.next
+**/dist
+**/.next
+coverage
+*.sqlite
+*.sqlite-journal
+*.db
+*.db-journal
+apps/backend/db.sqlite
+apps/frontend/.env.local
+**/*.tsbuildinfo
