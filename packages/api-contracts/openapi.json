@@ -1,0 +1,345 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Trading Platform API",
+    "version": "1.0.0",
+    "description": "REST API for equity trade management"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "Local development"
+    }
+  ],
+  "paths": {
+    "/trades": {
+      "get": {
+        "tags": [
+          "trades"
+        ],
+        "summary": "List all trades",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TradeDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "trades"
+        ],
+        "summary": "Create a trade",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTradeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TradeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trades/{id}": {
+      "get": {
+        "tags": [
+          "trades"
+        ],
+        "summary": "Get a trade by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^TRD-\\d+$"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TradeDto"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "trades"
+        ],
+        "summary": "Update a trade",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^TRD-\\d+$"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTradeDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TradeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trades/{id}/cancel": {
+      "patch": {
+        "tags": [
+          "trades"
+        ],
+        "summary": "Cancel a trade",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "^TRD-\\d+$"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TradeDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TradeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "symbol": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 1
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0.01
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ]
+          },
+          "trader": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "tradeDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "CANCELLED"
+            ]
+          },
+          "book": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "counterparty": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "tradeTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "symbol",
+          "quantity",
+          "price",
+          "side",
+          "trader",
+          "tradeDate",
+          "status",
+          "book",
+          "counterparty",
+          "tradeTimestamp"
+        ]
+      },
+      "CreateTradeDto": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 1
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0.01
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ]
+          },
+          "trader": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "tradeDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "book": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "counterparty": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "tradeTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "symbol",
+          "quantity",
+          "price",
+          "side",
+          "trader",
+          "book",
+          "counterparty"
+        ]
+      },
+      "UpdateTradeDto": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10
+          },
+          "quantity": {
+            "type": "number",
+            "minimum": 1
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0.01
+          },
+          "side": {
+            "type": "string",
+            "enum": [
+              "BUY",
+              "SELL"
+            ]
+          },
+          "trader": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 20
+          },
+          "tradeDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "book": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 40
+          },
+          "counterparty": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 60
+          }
+        }
+      }
+    }
+  }
+}
